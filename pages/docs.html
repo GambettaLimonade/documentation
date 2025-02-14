@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCS / Issam</title>
+    <link rel="icon" href="../images/favicons/fry.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: black;
+            color: limegreen;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        header::before,
+        header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        header::before {
+            left: -10px;
+            height: 80%;
+            width: 10px;
+        }
+
+        header::after {
+            right: -10px;
+            height: 80%;
+            width: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            margin-top: 30px;
+            color: lightgreen;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            display: none;
+        }
+    
+        .category {
+            margin-top: 30px;
+        }
+    
+        .tech-item {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+    
+        .tech-item a {
+            color: lightgreen;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+        }
+
+        .tech-item a:hover {
+            color: yellow;
+            transform: scale(0.9);
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+            cursor: url('../images/favicons/fry.png'), auto;
+        }
+
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .light-mode {
+            background-color: #f0f0f0;
+            color: #0044cc;
+        }
+
+        .light-mode h1, .light-mode h2 {
+            color: #0066ff;
+        }
+
+        .light-mode .tech-item a {
+            color: #0066ff;
+        }
+
+        .light-mode .tech-item a:hover {
+            color: #cc00ff;
+            box-shadow: 0 0 15px rgba(204, 0, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrixCanvas"></canvas>
+
+    <header>
+        <!-- Navbar removed -->
+    </header>
+
+    <h1 id="title"></h1>
+    <h2 id="subtitle"></h2>
+
+    <div class="container" id="content">
+        <!-- Categories of Technologies -->
+        <div class="category">
+            <h2>Langages de Programmation</h2>
+            <div class="tech-item">
+                <a href="https://www.python.org/" target="_blank">Python</a> - Un langage de programmation simple et puissant utilisé pour l'automatisation, avec des bibliothèques comme `Selenium` et `PyAutoGUI`.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.java.com/" target="_blank">Java</a> - Utilisé avec des frameworks comme `JUnit` et `TestNG` pour les tests automatisés.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.javascript.com/" target="_blank">JavaScript</a> - Langage clé pour l'automatisation côté front-end, avec des outils comme `Cypress` et `Puppeteer`.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.ruby-lang.org/" target="_blank">Ruby</a> - Langage apprécié pour les tests automatisés avec `Capybara` et `RSpec`.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.php.net/" target="_blank">PHP</a> - Langage de script côté serveur, souvent utilisé pour le développement web.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.go.dev/" target="_blank">Go</a> - Langage de programmation moderne, connu pour sa simplicité et sa performance.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.swift.org/" target="_blank">Swift</a> - Langage de programmation pour le développement d'applications iOS et macOS.
+            </div>
+            <div class="tech-item">
+                <a href="https://kotlinlang.org/" target="_blank">Kotlin</a> - Langage moderne pour le développement Android, compatible avec Java.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.rust-lang.org/" target="_blank">Rust</a> - Langage de programmation axé sur la sécurité et la performance.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.scala-lang.org/" target="_blank">Scala</a> - Langage qui combine la programmation orientée objet et la programmation fonctionnelle.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.sql.org/" target="_blank">SQL</a> - Langage de requête pour gérer et manipuler des bases de données.
+            </div>
+        </div>
+    
+        <div class="category">
+            <h2>Frameworks et Outils de Test</h2>
+            <div class="tech-item">
+                <a href="https://www.selenium.dev/" target="_blank">Selenium</a> - Framework pour l'automatisation des tests de navigateurs web.
+            </div>
+            <div class="tech-item">
+                <a href="https://robotframework.org/" target="_blank">Robot Framework</a> - Framework d'automatisation des tests basé sur des mots-clés.
+            </div>
+            <div class="tech-item">
+                <a href="https://serenity-bdd.github.io/serenity-core/" target="_blank">Serenity BDD</a> - Framework de test pour Java qui facilite la création de tests automatisés.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.jestjs.io/" target="_blank">Jest</a> - Framework de test JavaScript, souvent utilisé avec React.
+            </div>
+            <div class="tech-item">
+                <a href="https://mochajs.org/" target="_blank">Mocha</a> - Framework de test JavaScript pour Node.js.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.testng.org/" target="_blank">TestNG</a> - Framework de test pour Java, inspiré de JUnit.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.jasmine.github.io/" target="_blank">Jasmine</a> - Framework de test pour JavaScript.
+            </div>
+            <div class="tech-item">
+                <a href="https://cucumber.io/" target="_blank">Cucumber</a> - Outil de test basé sur le comportement (BDD) qui utilise Gherkin pour écrire des scénarios.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.qtest.com/" target="_blank">qTest</a> - Outil de gestion des tests et de suivi des défauts.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.hp.com/us-en/software-solutions/alm-octane.html" target="_blank">HP ALM</a> - Outil de gestion du cycle de vie des applications.
+            </div>
+        </div>
+    
+        <div class="category">
+            <h2>CI/CD et Outils d'Intégration Continue</h2>
+            <div class="tech-item">
+                <a href="https://www.jenkins.io/" target="_blank">Jenkins</a> - Outil d'intégration continue largement utilisé pour automatiser les builds et les tests.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.travis-ci.com/" target="_blank">Travis CI</a> - Service d'intégration continue pour GitHub.
+            </div>
+            <div class="tech-item">
+                <a href="https://circleci.com/" target="_blank">CircleCI</a> - Outil d'intégration continue et de déploiement continu.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.gitlab.com/" target="_blank">GitLab CI</a> - Outil d'intégration continue intégré à GitLab.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.azure.com/en-us/services/devops/pipelines/" target="_blank">Azure DevOps</a> - Outil de gestion de projet et d'intégration continue de Microsoft.
+            </div>
+        </div>
+    
+        <div class="category">
+            <h2>Outils de Versionning</h2>
+            <div class="tech-item">
+                <a href="https://github.com/" target="_blank">GitHub</a> - Plateforme de versionning très utilisée, avec des fonctionnalités pour l'intégration continue.
+            </div>
+            <div class="tech-item">
+                <a href="https://gitlab.com/" target="_blank">GitLab</a> - Outil de gestion de version et de collaboration.
+            </div>
+            <div class="tech-item">
+                <a href="https://bitbucket.org/" target="_blank">Bitbucket</a> - Outil de gestion de version et de collaboration, souvent utilisé avec Jira.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.sourcetreeapp.com/" target="_blank">Sourcetree</a> - Client Git graphique pour Windows et Mac.
+            </div>
+        </div>
+    
+        <div class="category">
+            <h2>Outils Divers</h2>
+            <div class="tech-item">
+                <a href="https://www.docker.com/" target="_blank">Docker</a> - Outil de virtualisation des applications permettant d'automatiser la création, le test et le déploiement d'environnements.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.kubernetes.io/" target="_blank">Kubernetes</a> - Système d'orchestration de conteneurs pour automatiser le déploiement, la mise à l'échelle et la gestion des applications conteneurisées.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.ansible.com/" target="_blank">Ansible</a> - Outil d'automatisation pour la gestion de la configuration et le déploiement d'applications.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.terraform.io/" target="_blank">Terraform</a> - Outil d'infrastructure as code pour gérer les ressources cloud.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.postman.com/" target="_blank">Postman</a> - Outil pour tester et documenter les API.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.atlassian.com/software/jira" target="_blank">Jira</a> - Outil de gestion de projet et de suivi des problèmes.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.elastic.co/fr/kibana" target="_blank">Kibana</a> - Outil de visualisation de données pour Elasticsearch.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.putty.org/" target="_blank">PuTTY</a> - Client SSH et telnet pour Windows.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.tibco.com/" target="_blank">TIBCO</a> - Outils d'intégration et de gestion des données.
+            </div>
+            <div class="tech-item">
+                <a href="https://www.dynatrace.com/" target="_blank">Dynatrace</a> - Outil de surveillance des performances des applications.
+            </div>
+            <div class="tech-item">
+                <a href="https://dbeaver.io/" target="_blank">DBeaver</a> - Outil de gestion de base de données universel.
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        // Matrix effect
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array.from({ length: columns }).fill(1);
+
+        let matrixColor = '#0F0'; // Default green color
+        let backgroundColor = 'rgba(0, 0, 0, 0.05)'; // Default black background
+
+        function draw() {
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = matrixColor;
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        // Typing effect
+        const titleText = "Technologies pour l'automatisation";
+        const subtitleText = "Documentation des outils et technologies";
+        const titleElement = document.getElementById('title');
+        const subtitleElement = document.getElementById('subtitle');
+        const contentElement = document.getElementById('content');
+
+        function typeWriter(text, element, callback) {
+            let index = 0;
+            function type() {
+                if (index < text.length) {
+                    element.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+        typeWriter(titleText, titleElement, () => {
+            typeWriter(subtitleText, subtitleElement, () => {
+                contentElement.style.display = 'block'; 
+            });
+        });
+
+        // Light mode effect
+        document.body.addEventListener('click', () => {
+            document.body.classList.add('light-mode');
+            matrixColor = '#0044cc'; // Change matrix color to blue
+            backgroundColor = 'rgba(240, 240, 240, 0.05)'; // Change background to light gray
+            setTimeout(() => {
+                document.body.classList.remove('light-mode');
+                matrixColor = '#0F0'; // Revert matrix color to green
+                backgroundColor = 'rgba(0, 0, 0, 0.05)'; // Revert background to black
+            }, 2000); // Duration for light mode effect
+        });
+    </script>
+</body>
+</html>

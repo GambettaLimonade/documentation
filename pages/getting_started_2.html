@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GETTING STARTED 2 / Issam</title>
+    <link rel="icon" href="../images/favicons/hermes_conrad.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #spaceCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+        }
+
+        .start-button {
+            position: absolute;
+            bottom: 30%;
+            z-index: 20;
+            padding: 15px 30px;
+            background-color: #55FF55;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .start-button:hover {
+            background-color: #33CC33;
+            transform: translateY(-5px);
+            cursor: url('images/favicons/leela.png'), auto;
+        }
+
+        .video-container {
+    display: none;
+    position: relative;
+    z-index: 20;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    text-align: center;
+    animation: fadeIn 1s forwards; /* Animation on appearance */
+}
+
+video {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Limite la hauteur maximale de la vidéo */
+    border: 3px solid #55FF55;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #33CC33;
+}
+        a:hover {
+            color: yellow;
+            transform: scale(0.9);
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+            cursor: url('images/favicons/leela.png'), auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="spaceCanvas"></canvas>
+
+    <button class="start-button" onclick="startJourney()">Selenium 2</button>
+
+    <div class="video-container" id="videoContainer">
+        <video controls poster="../images/miniature.webp">
+            <source src="../images/tuto/selenium2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('spaceCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = Array.from({ length: 150 }).map(() => ({
+            x: 0,
+            y: 0,
+            z: Math.random() * canvas.width,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2,
+            size: Math.random() * 3 + 1,
+            flicker: Math.random() > 0.8 ? true : false
+        }));
+
+        let speedMultiplier = 1;
+        let targetSpeedMultiplier = 1;
+        let canvasColor = { r: 0, g: 0, b: 20, a: 0.5 };
+        let starsColor = 'green'; // Default color for stars
+
+        function drawStar(x, y, size, flicker) {
+            // Use a solid color for a more retro look
+            ctx.fillStyle = flicker ? starsColor : 'lightgray';
+            ctx.fillRect(x - size / 2, y - size / 2, size, size); // Draw a square
+        }
+
+        function draw() {
+            // Adjust the alpha for the trail effect
+            const trailAlpha = targetSpeedMultiplier > 1 ? 0.1 : 0.5;
+            ctx.fillStyle = `rgba(${canvasColor.r}, ${canvasColor.g}, ${canvasColor.b}, ${trailAlpha})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            stars.forEach(star => {
+                const k = 128.0 / star.z;
+                const px = star.x * k + canvas.width / 2;
+                const py = star.y * k + canvas.height / 2;
+
+                if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
+                    drawStar(px, py, star.size, star.flicker);
+                }
+
+                star.x += star.vx * speedMultiplier;
+                star.y += star.vy * speedMultiplier;
+                star.z -= 2 * speedMultiplier;
+
+                if (star.z <= 0 || px < 0 || px > canvas.width || py < 0 || py > canvas.height) {
+                    star.x = 0;
+                    star.y = 0;
+                    star.z = canvas.width;
+                    star.vx = (Math.random() - 0.5) * 2;
+                    star.vy = (Math.random() - 0.5) * 2;
+                    star.size = Math.random() * 3 + 1;
+                    star.flicker = Math.random() > 0.8 ? true : false;
+                }
+
+                if (star.flicker && Math.random() > 0.95) {
+                    star.flicker = false;
+                } else if (!star.flicker && Math.random() > 0.99) {
+                    star.flicker = true;
+                }
+            });
+
+            // Smooth transitioning for speed
+            speedMultiplier += (targetSpeedMultiplier - speedMultiplier) * 0.05;
+
+            // Smooth transition for canvas color
+            if (targetSpeedMultiplier > 1) {
+                canvasColor.r += (245 - canvasColor.r) * 0.05;
+                canvasColor.g += (245 - canvasColor.g) * 0.05;
+                canvasColor.b += (245 - canvasColor.b) * 0.05;
+            } else {
+                canvasColor.r += (0 - canvasColor.r) * 0.05;
+                canvasColor.g += (0 - canvasColor.g) * 0.05;
+                canvasColor.b += (20 - canvasColor.b) * 0.05;
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        // Change star color on click
+        canvas.addEventListener('click', () => {
+            starsColor = 'cyan'; // Change to a color of your choice
+            setTimeout(() => {
+                starsColor = 'white'; // Revert back to original color
+            }, 500); // Duration of color change
+        });
+
+        function startJourney() {
+            targetSpeedMultiplier = 5;
+            setTimeout(() => {
+                targetSpeedMultiplier = 1;
+                setTimeout(showVideo, 1000); // Show video after the animation
+            }, 1000);
+        }
+
+        function showVideo() {
+            const videoContainer = document.getElementById('videoContainer');
+            videoContainer.style.display = 'block';
+        }
+
+        draw();
+    </script>
+</body>
+</html>
